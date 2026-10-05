@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ page.title }}</title>
+  <meta name="author" content="Make.It.Simple" />
+  <meta name="description" content="{{ site.description }}" />
+  <link rel="stylesheet" href="/css/site.css" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/images/logo.png" />
+</head>
+
+<body>
+  <section class="sidebar">
+    <a href="/">
+      <img src="/images/logo.png" height="75" width="75" class="avatar" alt="Make.It.Simple" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="make">Make</span><br />
+        <span id="itsimple">It Simple</span>
+      </a>
+    </section>
+
+    <section class="alt-text">We make apps as simple as possible.</section>
+
+    <section class="meta">
+      <a href="https://play.google.com/store/apps/dev?id=7477280931481749251" id="play">
+        <img src="/images/play.png" alt="play" title="Apps by Make It Simple" height="16" width="16" />
+      </a>
+    </section>
+  </section>
+
+  {{ content }}
+
+</body>
+</html>

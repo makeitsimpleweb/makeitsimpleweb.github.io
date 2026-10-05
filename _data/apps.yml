@@ -1,0 +1,9 @@
+- name: "NoteMe - Note Notepad"
+  slug: noteme
+  package: com.makeitsimple.noteme
+- name: "WePlan"
+  slug: weplan
+  package: com.makeitsimple.we_plan
+- name: "ShuttlePay"
+  slug: shuttlepay
+  package: com.makeitsimple.shuttlepay
