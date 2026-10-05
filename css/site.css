@@ -54,6 +54,27 @@ a {
 .sidebar .meta {
   margin-top: 20px;
 }
+.sidebar .sections {
+  margin-top: 25px;
+}
+.sidebar .sections ul {
+  margin: 0;
+  padding: 0;
+}
+.sidebar .sections li {
+  list-style: none;
+  margin-bottom: 7px;
+}
+.sidebar .sections a {
+  background-color: black;
+  padding: 3px 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
+.sidebar .sections a:hover {
+  color: #ccc;
+}
 
 .content {
   margin-left: 160px;
@@ -182,6 +203,16 @@ a {
   }
   .sidebar .meta {
     margin: 0 0 0 auto;
+  }
+  .sidebar .sections {
+    margin: 0 0 0 20px;
+  }
+  .sidebar .sections li {
+    margin-bottom: 0;
+  }
+  .sidebar .sections a {
+    font-size: 16px;
+    padding: 5px 10px;
   }
   .content,
   .content.wide {
