@@ -1,4 +1,4 @@
-- name: "NoteMe - Note Notepad"
+- name: "NoteMe"
   slug: noteme
   package: com.makeitsimple.noteme
 - name: "WePlan"
