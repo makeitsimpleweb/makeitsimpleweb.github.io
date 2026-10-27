@@ -3,12 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
   <title>{{ page.title }}</title>
   <meta name="author" content="Make.It.Simple" />
   <meta name="description" content="{{ site.description }}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
   <link rel="stylesheet" href="/css/site.css" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/images/logo.png" />
+  <script>
+    // Apply the saved theme before the page paints so there is no flash.
+    try {
+      var theme = localStorage.getItem('theme');
+      if (theme === 'dark' || theme === 'light') document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  </script>
 </head>
 
 <body>
@@ -26,20 +35,54 @@
 
     <section class="alt-text">We make apps as simple as possible.</section>
 
-    <section class="meta">
-      <a href="https://play.google.com/store/apps/dev?id=7477280931481749251" id="play">
-        <img src="/images/play.png" alt="play" title="Apps by Make It Simple" height="16" width="16" />
+    <nav class="nav" aria-label="Main">
+      <a href="/" class="nav-item" title="Apps"{% if page.url == '/' %} aria-current="page"{% endif %}>
+        <svg class="play-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#00a0ff" d="M3.6 1.9c-.4.2-.6.7-.6 1.3v17.6c0 .6.2 1.1.6 1.3L13.4 12z"/><path fill="#00d95f" d="M17 8.4 13.4 12 3.6 1.9c.4-.2 1-.2 1.5.1z"/><path fill="#ff3a44" d="M17 15.6 13.4 12 3.6 22.1c.4.2 1 .2 1.5-.1z"/><path fill="#ffc400" d="M20.5 10.4 17 8.4 13.4 12 17 15.6l3.5-2c.7-.4.7-2.8 0-3.2z"/></svg>
+        <span class="label">Apps</span>
       </a>
-    </section>
-
-    <section class="sections">
-      <ul>
-        <li><a href="/about">about</a></li>
-      </ul>
-    </section>
+      <a href="/about" class="nav-item" title="About"{% if page.url == '/about.html' or page.url == '/about' %} aria-current="page"{% endif %}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span class="label">About</span>
+      </a>
+      <button type="button" class="nav-item theme-toggle" id="theme-toggle" title="Switch to dark theme">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="label">Dark mode</span>
+      </button>
+    </nav>
   </section>
 
   {{ content }}
 
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var button = document.getElementById('theme-toggle');
+      if (!button) return;
+
+      // The saved/chosen theme, else the device setting.
+      function current() {
+        var theme = root.getAttribute('data-theme');
+        if (theme) return theme;
+        return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      // The button names what it switches to.
+      function label() {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        button.querySelector('.label').textContent = next === 'dark' ? 'Dark mode' : 'Light mode';
+        button.setAttribute('title', 'Switch to ' + next + ' theme');
+      }
+
+      button.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        label();
+      });
+
+      label();
+    })();
+  </script>
 </body>
 </html>

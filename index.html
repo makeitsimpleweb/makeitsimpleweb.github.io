@@ -4,20 +4,70 @@ title: "Make.It.Simple"
 ---
 
 <section class="content wide">
-  <ul class="apps">
+  <ul class="apps" id="apps">
     {% for app in site.data.apps %}
-      <li>
+      {% assign stats = site.data.play_stats[app.package] %}
+      <li data-installs="{{ stats.installs }}" data-rating="{{ stats.rating }}" data-released="{{ stats.released }}">
         <a href="https://play.google.com/store/apps/details?id={{ app.package }}" target="_blank" rel="noopener">
           <img class="feature" src="/images/apps/{{ app.package }}-feature.webp" alt="" loading="lazy" />
           <span class="info">
             <img class="icon" src="/images/apps/{{ app.package }}-icon.webp" alt="" loading="lazy" />
             <span class="text">
               <span class="title">{{ app.name }}</span>
-              <span class="developer">Make.It.Simple</span>
+              <span class="stats">
+                {% if stats.rating %}<span class="rating" title="Rating {{ stats.rating }}"><span class="star">&#9733;</span>{{ stats.rating }}</span>{% endif %}
+                {% if stats.installs %}<span class="installs" title="{{ stats.installs }} installs"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>{{ stats.installs }}</span>{% endif %}
+              </span>
             </span>
           </span>
+          {% if stats.description %}<span class="desc">{{ stats.description | escape }}</span>{% endif %}
         </a>
       </li>
     {% endfor %}
   </ul>
 </section>
+
+<script>
+  // Featured order, in place before first paint: apps released in the last
+  // 6 months first (newest first), then the rest by installs x rating.
+  (function () {
+    var list = document.getElementById('apps');
+    if (!list) return;
+
+    var cutoffDate = new Date();
+    cutoffDate.setMonth(cutoffDate.getMonth() - 6);
+    var cutoff = cutoffDate.toISOString().slice(0, 10);
+
+    // "100K+" -> 100000
+    function parseInstalls(text) {
+      var match = /^(\d+)([KMB]?)\+?$/.exec(text || '');
+      if (!match) return 1;
+      return Number(match[1]) * ({ K: 1e3, M: 1e6, B: 1e9 }[match[2]] || 1);
+    }
+
+    var entries = Array.prototype.map.call(list.children, function (el) {
+      var rating = parseFloat(el.getAttribute('data-rating')) || 0;
+      var installs = parseInstalls(el.getAttribute('data-installs'));
+      return {
+        el: el,
+        released: el.getAttribute('data-released') || '',
+        // Unrated apps count as 3.0 so they are not ranked below every rated app.
+        score: Math.log(Math.max(installs, 1)) / Math.LN10 * (rating || 3)
+      };
+    });
+
+    function newestFirst(a, b) {
+      return a.released < b.released ? 1 : a.released > b.released ? -1 : 0;
+    }
+
+    entries.sort(function (a, b) {
+      var aNew = a.released >= cutoff;
+      var bNew = b.released >= cutoff;
+      if (aNew !== bNew) return aNew ? -1 : 1;
+      if (aNew) return newestFirst(a, b);
+      return b.score - a.score || newestFirst(a, b);
+    }).forEach(function (entry) {
+      list.appendChild(entry.el);
+    });
+  })();
+</script>
