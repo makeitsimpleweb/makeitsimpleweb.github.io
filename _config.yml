@@ -1,3 +1,6 @@
 title: Make.It.Simple
 description: We make apps as simple as possible.
 email: wendywooden14@gmail.com
+# Jekyll skips folders that start with a dot; Android reads /.well-known/assetlinks.json
+# to let WePlan invite links open the app.
+include: [".well-known"]
