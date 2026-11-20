@@ -6,7 +6,7 @@ title: "WePlan - Privacy Policy"
 <div class="content">
   <div id="post">
     <h1>WePlan Privacy Policy</h1>
-    <p><em>Last updated: November 19, 2026</em></p>
+    <p><em>Last updated: November 20, 2026</em></p>
 
     <h2>Overview</h2>
     <p>WePlan ("the App") is a calendar app that you can share with the people you choose, developed by Make It Simple. We are committed to protecting your privacy. This policy explains what the App stores, who can see it, and how to delete it.</p>
@@ -23,40 +23,48 @@ title: "WePlan - Privacy Policy"
     <p>This data can be deleted by deleting your events, clearing the App's data or uninstalling the App.</p>
 
     <h3>What Is Stored on Our Server</h3>
-    <p>If you use a shared calendar, the App stores the following in a Google Firebase Firestore database (hosted by Google), under the calendar's share code:</p>
+    <p>Every calendar is kept on our server, so it works on all the phones that share it. The App stores the following with Google Firebase (hosted by Google), under the calendar's share code:</p>
     <ul>
-      <li><strong>Events</strong> - The title, description, date, start and end time and colour of each event</li>
+      <li><strong>Events</strong> - The title, description, date, start and end time and colour of each event, and when it was added or changed</li>
       <li><strong>Device name</strong> - The name you choose, so the people you share with can see who added an event</li>
       <li><strong>Device description</strong> - Your phone's model, operating system version and hardware type, used to tell devices apart. It is not your phone number or a unique device ID</li>
+      <li><strong>When the calendar was last opened</strong> - So calendars nobody uses any more can be deleted (see below)</li>
     </ul>
+
+    <h3>Getting Your Calendar Back After a Reinstall</h3>
+    <p>Uninstalling the App removes the calendar's share code from your phone. So that the App can bring your calendar back if you install it again on the same phone, it stores an anonymised identifier for your phone on our server, together with the calendar's share code, your device name and your colour. The identifier can't be turned back into your phone's ID, and it is not your phone number.</p>
 
     <h3>What We Don't Collect</h3>
     <ul>
       <li><strong>No contact details</strong> - We don't collect your name, email address, phone number or contact list</li>
       <li><strong>No location</strong> - The App doesn't use your location</li>
+      <li><strong>No analytics</strong> - The App doesn't track how you use it</li>
     </ul>
 
     <h2>Who Can See Your Data</h2>
-    <p>Anyone who has a calendar's share code, or scans its QR code, can see and edit that calendar's events. Only share the code with people you trust. Events you keep only on your own calendar are not uploaded.</p>
+    <p>Anyone who has a calendar's share code, or scans its QR code, can see and edit that calendar's events. Only share the code with people you trust.</p>
 
     <h2>Invite Links</h2>
     <p>The App can create a link to your calendar that you send to the people you choose. The link holds the calendar's share code, so anyone who has it can join the calendar. Only send it to people you trust. The page the link opens doesn't collect, store or pass on anything. When someone installs the App from the link, Google Play tells the App which calendar the link was for, so they can join it straight away.</p>
 
-    <h2>Analytics</h2>
-    <p>The App uses Google Analytics for Firebase to understand how it is used. Google may collect certain information as described in <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>, such as an app instance identifier, device model, operating system version, country and general usage of the App. We don't use it to identify you.</p>
+    <h2>Protecting Your Calendar</h2>
+    <p>To keep out copies of the App that aren't genuine, the App asks Google Play to confirm that it was installed from Google Play. Google may receive information about your phone and the App to do this, as described in <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</p>
+    <p>Calendars made with older versions of the App have a share code that is easier to guess. The App asks you to move such a calendar to a new, safer code and copies all its events there; then send the new invite to the people you share with. The App records that the old calendar moved, with the device name of the person who moved it and when, so the others can find out. It never records the new code there.</p>
 
     <h2>Permissions</h2>
     <h3>Camera</h3>
     <p>Used only to scan a QR code to join a shared calendar. The App doesn't take or store photos.</p>
     <h3>Internet Access</h3>
-    <p>Used to sync shared calendars and for analytics.</p>
-    <h3>Phone State</h3>
-    <p>Requested so the App can read your phone's model for the device description above.</p>
+    <p>Used to keep your calendar the same on every phone that shares it.</p>
 
     <h2>Data Retention and Deletion</h2>
     <ul>
       <li><strong>On your device</strong> - Delete events in the App, clear the App's data or uninstall the App</li>
-      <li><strong>On our server</strong> - Deleting an event in the App removes it from the shared calendar. To have a whole shared calendar deleted, contact us with its share code</li>
+      <li><strong>Events</strong> - Deleting an event in the App removes it from the calendar on our server</li>
+      <li><strong>Unused calendars</strong> - A calendar that nobody has opened or changed for 90 days is deleted, and so is a calendar with no events that nobody has opened for 30 days</li>
+      <li><strong>Moved calendars</strong> - When a calendar moves to a new code, the old calendar's events are deleted 30 days later. The record that it moved, with the name of the person who moved it, is deleted after a year</li>
+      <li><strong>Reinstall details</strong> - Deleted when the calendar they point to is deleted</li>
+      <li><strong>Sooner</strong> - To have a calendar deleted sooner, contact us with its share code</li>
     </ul>
 
     <h2>Children's Privacy</h2>
